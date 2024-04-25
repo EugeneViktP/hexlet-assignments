@@ -1,12 +1,8 @@
 package exercise;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.Javalin;
 import java.util.List;
 import java.util.Map;
-
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
 
 // BEGIN
 
@@ -25,10 +21,17 @@ public final class App {
         // BEGIN
         app.get("/companies/{id}", ctx -> {
             var id = ctx.pathParam("id");
-            var selectedCompany = Data.getCompanies().stream().filter(x -> x.get("id").equals(id)).toList();
-            String printOutput = selectedCompany.toString();
-//            var printThis = objectMapper.readTree(selectedCompany);
-            ctx.json(printOutput);
+            Map<String, String> selectedCompany = COMPANIES
+                    .stream()
+                    .filter(x -> x.get("id").equals(id))
+                    .findFirst().orElse(null);
+            if (selectedCompany != null) {
+                ctx.json(selectedCompany);
+            } else {
+                ctx.status(404);
+                ctx.result("Company not found");
+            }
+
         });
         // END
 
