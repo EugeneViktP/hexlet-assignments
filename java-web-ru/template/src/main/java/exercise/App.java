@@ -34,7 +34,7 @@ public final class App {
                     .findFirst().orElse(null);
             if (selectedUser == null) {
                 ctx.status(404);
-                ctx.result("Company not found");
+                ctx.result("User not found");
             }
             var page = new UserPage(selectedUser);
             ctx.render("users/show.jte", model("page", page));
