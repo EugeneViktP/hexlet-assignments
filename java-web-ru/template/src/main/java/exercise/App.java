@@ -30,7 +30,7 @@ public final class App {
             var id = ctx.pathParamAsClass("id", Long.class).get();
             var selectedUser = USERS
                     .stream()
-                    .filter(x -> x.getId() == id)
+                    .filter(x -> id.equals(x.getId()))
                     .findFirst().orElse(null);
             if (selectedUser == null) {
                 ctx.status(404);
