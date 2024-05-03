@@ -1,4 +1,4 @@
-@import exercise.dto.users.UserPage;
+@import exercise.dto.users.UserPage
 @param UserPage page
 
 <html lang="en">
@@ -14,8 +14,8 @@
 <body>
 <div class="mx-auto p-4 py-md-5">
     <main>
-        <%--        <a href="/users">Пользователи</a>--%>
-        <p>${page.getUser().toString()}</p>
+        <h2>${page.getUser().getFirstName()} ${page.getUser().getLastName()}</h2>
+        <div>${page.getUser().getEmail()}</div>
     </main>
 </div>
 </body>
